@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -35,4 +36,7 @@ public class Task {
     @NonNull
     @Column(nullable = false)
     private LocalDate deadline;
+
+    @Transient
+    private String statusStr;
 }
