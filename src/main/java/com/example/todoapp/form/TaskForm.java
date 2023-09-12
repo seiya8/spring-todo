@@ -1,18 +1,18 @@
 package com.example.todoapp.form;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import lombok.Data;
 import jakarta.validation.constraints.NotBlank;
 
 
 @Data
-public class CustomerForm {
+public class TaskForm {
     private Integer id;
     @NotBlank
-    private Int status;
+    private Integer status;
     @NotBlank
     private String title;
     @NotBlank
-    private LocalDateTime deadline;
+    private LocalDate deadline;
 }

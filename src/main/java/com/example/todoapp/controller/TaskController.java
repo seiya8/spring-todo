@@ -26,7 +26,9 @@ public class TaskController {
     TaskService taskService;
 
     @GetMapping("/")
-    String index() {
+    String index(Model model) {
+        List<Task> tasks = taskService.getAll();
+        model.addAttribute("tasks", tasks);
         return "index";
     }
 }

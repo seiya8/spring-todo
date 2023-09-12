@@ -1,6 +1,6 @@
 package com.example.todoapp.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -11,6 +11,7 @@ import jakarta.persistence.Table;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NonNull;
 import lombok.NoArgsConstructor;
 
 @Entity
@@ -33,5 +34,5 @@ public class Task {
 
     @NonNull
     @Column(nullable = false)
-    private LocalDateTime deadline;
+    private LocalDate deadline;
 }

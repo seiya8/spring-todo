@@ -24,9 +24,9 @@ DROP TABLE IF EXISTS `tasks`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `tasks` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `state` tinyint(1) DEFAULT 0,
+  `status` tinyint(1) DEFAULT 0,
   `title` varchar(255) NOT NULL,
-  `deadline` datetime NOT NULL,
+  `deadline` date NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`)
