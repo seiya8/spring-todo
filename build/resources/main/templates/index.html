@@ -10,23 +10,29 @@
     <script th:href="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
     <div class="container-fluid">
         <h1>Task List</h1>
-        <div class="col-10">
-            <table class="table table-striped">
+        <div class="mx-3">
+            <button class="btn btn-outline-primary mb-3" type="button" onclick="window.location.href='/create';">新規作成</button>
+            <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th width="15%">Status</th>
-                        <th width="40%">Task</th>
-                        <th width="30%">Deadline</th>
-                        <th width="15%"></th>
+                        <th class="text-center" width="15%">Status</th>
+                        <th class="text-center" width="40%">Task</th>
+                        <th class="text-center" width="30%">Deadline</th>
+                        <th class="text-center" width="15%"></th>
                     </tr>
                 </thead>
                 <tbody id="taskTableBody">
                     <tr th:each="task : ${tasks}">
-                        <td th:text="${task.statusStr}"></td>
-                        <td th:text="${task.title}"></td>
-                        <td th:text="${task.deadline}"></td>
-                        <td th:if="${task.status}"></td>
-                        <td th:unless="${task.status}">
+                        <td class="text-center" th:if="${task.status}">
+                            <span class="badge rounded-pill bg-success">完了</span>
+                        </td>
+                        <td class="text-center" th:unless="${task.status}">
+                            <span class="badge rounded-pill bg-light text-dark">未完了</span>
+                        </td>
+                        <td class="text-left" th:text="${task.title}"></td>
+                        <td class="text-center" th:text="${task.deadline}"></td>
+                        <td class="text-center" th:if="${task.status}"></td>
+                        <td class="text-center" th:unless="${task.status}">
                             <form action="/changeStatus" method="post">
                                 <input type="hidden" name="id" th:value="${task.id}">
                                 <input class="btn btn-primary" type="submit" value="完了">

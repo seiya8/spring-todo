@@ -38,4 +38,19 @@ public class TaskController {
         taskService.updateStatus(task);
         return "redirect:/";
     }
+
+    @GetMapping("/create")
+    String create() {
+        return "create";
+    }
+
+    @PostMapping("/create")
+    String create(@Validated @ModelAttribute TaskForm taskForm, BindingResult result) {
+        if (result.hasErrors()) {
+            return "create";
+        }
+        // Task task = new Task();
+        // taskService.updateStatus(task);
+        return "redirect:/";
+    }
 }

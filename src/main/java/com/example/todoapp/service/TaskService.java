@@ -18,14 +18,7 @@ public class TaskService {
 
     public List<Task> getAll() {
         List<Task> tasks = taskRepository.findAll();
-        tasks.forEach(task -> {
-            task.setStatusStr(convertStatusToString(task.getStatus()));
-        });
         return tasks;
-    }
-
-    private String convertStatusToString(int status) {
-        return (status == 0) ? "未完了" : "完了";
     }
 
     public Task findById(Integer id) {

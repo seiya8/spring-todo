@@ -36,7 +36,4 @@ public class Task {
     @NonNull
     @Column(nullable = false)
     private LocalDate deadline;
-
-    @Transient
-    private String statusStr;
 }
