@@ -1,6 +1,8 @@
 package com.example.todoapp.controller;
 
 import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,8 +51,7 @@ public class TaskController {
         if (result.hasErrors()) {
             return "create";
         }
-        // Task task = new Task();
-        // taskService.updateStatus(task);
+        taskService.create(taskForm);
         return "redirect:/";
     }
 }

@@ -29,4 +29,11 @@ public class TaskService {
         task.setStatus(1);
         taskRepository.save(task);
     }
+
+    public void create(TaskForm taskForm) {
+        Task task = new Task();
+        task.setTitle(taskForm.getTitle());
+        task.setDeadline(taskForm.getDeadline());
+        taskRepository.save(task);
+    }
 }

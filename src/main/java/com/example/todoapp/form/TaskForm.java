@@ -4,15 +4,14 @@ import java.time.LocalDate;
 
 import lombok.Data;
 import jakarta.validation.constraints.NotBlank;
-
+import jakarta.validation.constraints.NotNull;
 
 @Data
 public class TaskForm {
     private Integer id;
-    @NotBlank
     private Integer status;
     @NotBlank
     private String title;
-    @NotBlank
+    @NotNull
     private LocalDate deadline;
 }
