@@ -6,8 +6,8 @@
 <title>Todo App</title>
 </head>
 <body>
-    <script th:href="@{/webjars/jquery/3.7.1/js/jquery.min.js}"></script>
-    <script th:href="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
     <div class="container-fluid">
         <h1>Task List</h1>
         <div class="mx-4">
@@ -23,12 +23,10 @@
                     </tr>
                 </thead>
                 <tbody id="taskTableBody">
-                    <tr th:each="task : ${tasks}">
-                        <td class="text-center" th:if="${task.status}">
-                            <span class="badge rounded-pill bg-success">完了</span>
-                        </td>
-                        <td class="text-center" th:unless="${task.status}">
-                            <span class="badge rounded-pill bg-light text-dark">未完了</span>
+                    <tr th:each="task: ${tasks}">
+                        <td class="text-center statusCell">
+                            <span th:if="${task.status}" class="badge rounded-pill bg-success">完了</span>
+                            <span th:unless="${task.status}" class="badge rounded-pill bg-light text-dark">未完了</span>
                         </td>
                         <td class="text-left" th:text="${task.title}"></td>
                         <td class="text-center" th:text="${task.deadline}"></td>
@@ -40,9 +38,9 @@
                         </td>
                         <td class="text-center" th:if="${task.status}"></td>
                         <td class="text-center" th:unless="${task.status}">
-                            <form action="/changeStatus" method="post">
+                            <form action="/changeStatus" method="post" class="changeForm">
                                 <input type="hidden" name="id" th:value="${task.id}">
-                                <input class="btn btn-primary" type="submit" value="完了">
+                                <input class="btn btn-primary changeButton" type="submit" value="完了">
                             </form>
                         </td>
                     </tr>
@@ -50,5 +48,25 @@
             </table>
         </div>
     </div>
+    <script>
+        $(function() {
+            $('.changeButton').on('click', function() {
+                let form = $(this).closest('.changeForm');
+                let statusCell = form.parent().siblings('.statusCell');
+                let formData = form.serialize();
+                $.ajax({
+                    type: 'POST',
+                    url: '/changeStatus',
+                    data: formData,
+                    success: function(response) {
+                        statusCell.html('<span class="badge rounded-pill bg-success">完了</span>');
+                    },
+                    error: function(error) {
+                        console.error(error);
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
