@@ -42,13 +42,29 @@ public class TaskController {
     }
 
     @GetMapping("/create")
-    String create() {
+    String create(Model model) {
+        model.addAttribute("taskForm", new TaskForm());
+        return "create";
+    }
+
+    @GetMapping("/edit")
+    String edit(@RequestParam("id") Integer id, Model model) {
+        Task task = taskService.findById(id);
+        TaskForm taskForm = new TaskForm();
+        if (task != null) {
+            taskForm.setId(task.getId());
+            taskForm.setTitle(task.getTitle());
+            taskForm.setDeadline(task.getDeadline());
+        }
+        model.addAttribute("taskForm", taskForm);
+        model.addAttribute("isNew", false);
         return "create";
     }
 
     @PostMapping("/create")
-    String create(@Validated @ModelAttribute TaskForm taskForm, BindingResult result) {
+    String create(@Validated @ModelAttribute TaskForm taskForm, BindingResult result, Model model) {
         if (result.hasErrors()) {
+            model.addAttribute("taskForm", taskForm);
             return "create";
         }
         taskService.create(taskForm);

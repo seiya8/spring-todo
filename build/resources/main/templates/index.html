@@ -10,15 +10,16 @@
     <script th:href="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
     <div class="container-fluid">
         <h1>Task List</h1>
-        <div class="mx-3">
+        <div class="mx-4">
             <button class="btn btn-outline-primary mb-3" type="button" onclick="window.location.href='/create';">新規作成</button>
             <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th class="text-center" width="15%">Status</th>
-                        <th class="text-center" width="40%">Task</th>
-                        <th class="text-center" width="30%">Deadline</th>
-                        <th class="text-center" width="15%"></th>
+                        <th class="text-center" width="30%">Task</th>
+                        <th class="text-center" width="25%">Deadline</th>
+                        <th width="15%"></th>
+                        <th width="15%"></th>
                     </tr>
                 </thead>
                 <tbody id="taskTableBody">
@@ -31,6 +32,12 @@
                         </td>
                         <td class="text-left" th:text="${task.title}"></td>
                         <td class="text-center" th:text="${task.deadline}"></td>
+                        <td class="text-center">
+                            <form action="/edit" method="get">
+                                <input type="hidden" name="id" th:value="${task.id}">
+                                <input class="btn btn-primary" type="submit" value="編集">
+                            </form>
+                        </td>
                         <td class="text-center" th:if="${task.status}"></td>
                         <td class="text-center" th:unless="${task.status}">
                             <form action="/changeStatus" method="post">
