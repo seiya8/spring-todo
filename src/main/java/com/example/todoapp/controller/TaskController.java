@@ -28,14 +28,14 @@ public class TaskController {
     @GetMapping("/")
     String index(Model model) {
         List<Task> tasks = taskService.getAll();
-        tasks.forEach(task -> {
-            if (task.getStatus() == 0) {
-                task.setStatusStr("未完了");
-            } else {
-                task.setStatusStr("完了");
-            }
-        });
         model.addAttribute("tasks", tasks);
         return "index";
+    }
+
+    @PostMapping("/changeStatus")
+    String changeStatus(@RequestParam Integer id) {
+        Task task = taskService.findById(id);
+        taskService.updateStatus(task);
+        return "redirect:/";
     }
 }

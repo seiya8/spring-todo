@@ -17,10 +17,23 @@ public class TaskService {
     TaskRepository taskRepository;
 
     public List<Task> getAll() {
-        return taskRepository.findAll();
+        List<Task> tasks = taskRepository.findAll();
+        tasks.forEach(task -> {
+            task.setStatusStr(convertStatusToString(task.getStatus()));
+        });
+        return tasks;
+    }
+
+    private String convertStatusToString(int status) {
+        return (status == 0) ? "未完了" : "完了";
     }
 
     public Task findById(Integer id) {
         return taskRepository.findById(id).orElseThrow();
+    }
+
+    public void updateStatus(Task task) {
+        task.setStatus(1);
+        taskRepository.save(task);
     }
 }

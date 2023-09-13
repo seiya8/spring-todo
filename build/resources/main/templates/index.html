@@ -25,10 +25,11 @@
                         <td th:text="${task.statusStr}"></td>
                         <td th:text="${task.title}"></td>
                         <td th:text="${task.deadline}"></td>
-                        <td>
-                            <form action="/changeState" method="post">
+                        <td th:if="${task.status}"></td>
+                        <td th:unless="${task.status}">
+                            <form action="/changeStatus" method="post">
                                 <input type="hidden" name="id" th:value="${task.id}">
-                                <input class="btn btn-primary" type="submit" value="OK">
+                                <input class="btn btn-primary" type="submit" value="完了">
                             </form>
                         </td>
                     </tr>
