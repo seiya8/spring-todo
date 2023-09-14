@@ -8,6 +8,7 @@
 <body>
     <script th:src="@{/webjars/jquery/3.7.1/jquery.min.js}"></script>
     <script th:src="@{/webjars/bootstrap/5.3.1/js/bootstrap.min.js}"></script>
+    <script th:src="@{/app.js}"></script>
     <div class="container-fluid">
         <h1>Task List</h1>
         <div class="mx-4">
@@ -48,25 +49,5 @@
             </table>
         </div>
     </div>
-    <script>
-        $(function() {
-            $('.changeButton').on('click', function() {
-                let form = $(this).closest('.changeForm');
-                let statusCell = form.parent().siblings('.statusCell');
-                let formData = form.serialize();
-                $.ajax({
-                    type: 'POST',
-                    url: '/changeStatus',
-                    data: formData,
-                    success: function(response) {
-                        statusCell.html('<span class="badge rounded-pill bg-success">完了</span>');
-                    },
-                    error: function(error) {
-                        console.error(error);
-                    }
-                });
-            });
-        });
-    </script>
 </body>
 </html>
